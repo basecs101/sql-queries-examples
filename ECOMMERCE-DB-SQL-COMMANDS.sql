@@ -133,7 +133,7 @@ SELECT * FROM Supplier;
 
 DELETE FROM CUSTOMERS WHERE CUSTOMERID=101;
 
-SELECT * FROM customers;
+SELECT * FROM customers order by CustomerID DESC limit 4;
 
 SELECT COUNT(*) AS COUNT FROM customers;
 SELECT SUM(CustomerID) AS SUM FROM customers;
