@@ -240,6 +240,9 @@ FROM ORDERS CROSS JOIN CUSTOMERS;
 
 -- 5. SELF JOIN
 -- Q- Select all customers who belong to same city.
+
+SELECT COUNT(*) FROM customers AS A, customers AS B; -- VERY SIMILAR TO CROSS JOIN BUT ONLY APPLIES ON SINGLE TABLE
+
 SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City AS City1, B.City AS City2
 FROM Customers AS A, Customers AS B
 WHERE A.CustomerName <> B.CustomerName AND A.City = B.City;
@@ -308,5 +311,36 @@ CREATE INDEX CITIZEN
 ON PERSONS (COUNTRY);
 
 SELECT * FROM PERSONS USE INDEX (CITIZEN) WHERE COUNTRY="INDIA";
--- THIS COMMAND INTERNALLY USES INDEX TO PERFORM FAST SEARCHING
+
+-- ############ UNION AND UNION ALL #############
+-- The UNION operator is used to combine the result-set of two or more SELECT statements.
+-- 1. Every SELECT statement within UNION must have the same number of columns
+-- 2. The columns must also have similar data types
+-- 3. The columns in every SELECT statement must also be in the same order
+
+-- PRODUCES ONLY UNIQUE ELEMENTS
+SELECT EmployeeID FROM employees
+UNION
+SELECT CustomerName FROM customers;
+
+SELECT CustomerName FROM customers
+UNION ALL
+SELECT CustomerName FROM customers;
+
+
+-- DISTINCT KEYWORD
+SELECT COUNT(distinct( CITY)) FROM ecommerce.customers;
+
+-- ###### GROUP BY AND HAVING CLAUSE #######
+SELECT COUNT(CustomerID) AS COUNT_CUST, CITY FROM ecommerce.customers
+GROUP BY CITY
+HAVING COUNT_CUST >=1;
+
+-- ##### LIKE OPERATOR  #####
+-- '_' ANY SINGLE CHAR
+-- '%' ANY NUMBER OF CHARS
+SELECT * FROM customers WHERE CustomerName LIKE "_I%";
+
+
+
 
