@@ -341,6 +341,49 @@ HAVING COUNT_CUST >=1;
 -- '%' ANY NUMBER OF CHARS
 SELECT * FROM customers WHERE CustomerName LIKE "_I%";
 
+--- ####### Views ####### ---
+-- 1. In SQL, a view is a virtual table based on the result-set of an SQL statement(SELECT STATEMENT).
+-- 2. A view contains rows and columns, just like a real table. The fields in a view are fields from one
+--  or more real tables in the database.
+-- 3. You can add SQL statements and functions to a view and present the data as if the data were
+-- coming from one single table.
 
+CREATE VIEW CUST_ID_CITY AS
+SELECT CustomerID, CITY FROM customers;
+
+CREATE VIEW CUST_ID_NAME_CITY AS
+SELECT CustomerID, CustomerName, CITY FROM customers;
+
+CREATE VIEW ORDER_CUSTOMER_VIEW AS
+SELECT ORDERS.OrderID, CUSTOMERS.CustomerName, ORDERS.OrderDate
+FROM ORDERS INNER JOIN CUSTOMERS ON customers.CustomerID = ORDERS.CustomerID;
+
+-- ANY - ALL ## BELOW IS EXAMPLE NESTED/INNER QUERY
+-- SELECT column_name(s)
+-- FROM table_name
+-- WHERE column_name operator ANY
+--   (SELECT column_name
+--   FROM table_name
+--   WHERE condition);
+SELECT * FROM customers
+WHERE CustomerID != ALL (SELECT CustomerID FROM customers WHERE CustomerID > 105);
+
+-- LIMIT IS USED TO LIMIT NUMBER OF RECORDS IN SELECT STATEMENT
+SELECT CustomerID FROM customers ORDER BY CustomerID DESC LIMIT 1;
+
+-- AGREGATE FUNCS
+SELECT AVG(CustomerID) FROM customers;
+SELECT MIN(CustomerID) FROM customers;
+SELECT COUNT(CustomerID) FROM customers;
+SELECT MAX(CustomerID) FROM customers;
+SELECT SUM(CustomerID) FROM customers;
+
+CREATE TABLE TABLE1(NAME varchar(100));
+INSERT INTO TABLE1 (NAME) VALUE ("VIKRAM");
+CREATE TABLE TABLE2(NAME varchar(100));
+
+-- COPY DATA FROM ONE TABLE TO ANOTHER TABLE USING `INSERT INTO SELECT` STATEMENT
+INSERT INTO TABLE2
+SELECT * FROM TABLE1;
 
 
