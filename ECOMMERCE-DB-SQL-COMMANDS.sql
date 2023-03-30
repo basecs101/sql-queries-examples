@@ -386,4 +386,56 @@ CREATE TABLE TABLE2(NAME varchar(100));
 INSERT INTO TABLE2
 SELECT * FROM TABLE1;
 
+CREATE TABLE SUPPLIER
+(
+SupplierID INT NOT NULL,
+SupplierName varchar(100),
+ContactName	varchar(100),
+Address	varchar(100),
+City varchar(100),
+PostalCode	varchar(100),
+Country	varchar(100),
+Phone varchar(100)
+);
+
+ALTER TABLE SUPPLIER
+ADD PRIMARY KEY (SupplierID);
+
+INSERT INTO SUPPLIER
+(SupplierID,SupplierName,ContactName,Address,City,PostalCode,Country,Phone)
+VALUES(5000, "AMUL","AMUL","AHMEDABAD","AHMEDABAD", 1010101,"INDIA", 1212212);
+
+INSERT INTO SUPPLIER
+(SupplierID,SupplierName,ContactName,Address,City,PostalCode,Country,Phone)
+VALUES(5001, "CHITALE","CHITALE","PUNE","PUNE", 1010102,"INDIA", 1212213);
+
+INSERT INTO SUPPLIER
+(SupplierID,SupplierName,ContactName,Address,City,PostalCode,Country,Phone)
+VALUES(5002, "KATRAJ","KATRAJ","PUNE","PUNE", 1010103,"INDIA", 1212213);
+
+INSERT INTO SUPPLIER
+(SupplierID,SupplierName,ContactName,Address,City,PostalCode,Country,Phone)
+VALUES(5003, "GOKUL","GOKUL","KOLHAPUR","KOLHAPUR", 1010104,"INDIA", 1212214);
+
+
+CREATE TABLE PRODUCT
+(ProductID	INT NOT NULL,
+ProductName	VARCHAR(100),
+SupplierID INT,
+CategoryID	INT,
+Unit INT,
+Price INT,
+PRIMARY KEY (ProductID),
+FOREIGN KEY (SupplierID) REFERENCES supplier(SupplierID),
+foreign key (CategoryID) references categories(CategoryID)
+);
+
+-- Example of mulit line comment
+/*
+insert INTO PRODUCT
+(ProductID,ProductName,SupplierID,CategoryID,Unit,Price)
+VALUES(1, "MILK",5000,103,10,50);
+*/
+select * from product;
+
 
